@@ -1,0 +1,28 @@
+name: auto_route_example
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  auto_route: ^2.2.0
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^7.0.1
+  freezed_annotation: ^0.14.2
+  google_fonts: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  auto_route_generator: ^2.1.0
+  build_runner: ^2.0.4
+  lint: ^1.5.3
+
+flutter:
+  uses-material-design: true
