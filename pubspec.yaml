@@ -16,12 +16,14 @@ dependencies:
   flutter_bloc: ^7.0.1
   freezed_annotation: ^0.14.2
   google_fonts: ^2.1.0
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   auto_route_generator: ^2.1.0
   build_runner: ^2.0.4
+  freezed: ^0.14.2
   lint: ^1.5.3
 
 flutter:

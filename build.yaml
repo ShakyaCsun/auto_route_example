@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+          - "**/bloc/**.dart"
+          - "**/cubit/**.dart"
+      auto_route_generator|autoRouteGenerator:
+        generate_for:
+          - "lib/app_router.dart"
