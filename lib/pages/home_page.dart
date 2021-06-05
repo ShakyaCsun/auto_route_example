@@ -13,17 +13,48 @@ class HomePage extends StatelessWidget {
         title: const Text('HomePage'),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            AutoRouter.of(context).push(
-              const BooksRouter(
-                children: [
-                  BooksRoute(),
-                ],
-              ),
-            );
-          },
-          child: const Text('Go to BOOKS page'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                AutoRouter.of(context).push(
+                  const BooksRouter(
+                    children: [
+                      BooksRoute(),
+                    ],
+                  ),
+                );
+              },
+              child: const Text('Go to BOOKS page'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                AutoRouter.of(context).push(
+                  LoginWrapperRoute(
+                    onLogin: (isLoggedIn) {
+                      if (isLoggedIn) {
+                        AutoRouter.of(context).push(
+                          const AccountsRouter(
+                            children: [
+                              AccountRoute(),
+                            ],
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('LOGIN unsuccessful'),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                );
+              },
+              child: const Text('SIGN IN'),
+            ),
+          ],
         ),
       ),
     );

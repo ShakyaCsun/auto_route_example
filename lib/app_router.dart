@@ -5,6 +5,14 @@ import 'pages/pages.dart';
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
+    AutoRoute(
+      path: "/login",
+      page: LoginWrapperPage,
+      children: [
+        AutoRoute(page: EmailPage),
+        AutoRoute(page: PasswordPage),
+      ],
+    ),
     AutoRoute(path: '/', page: HomePage),
     CustomRoute(
       path: '/books',
