@@ -1,7 +1,8 @@
-import 'package:auto_route_example/app_router.gr.dart';
-import 'package:auto_route_example/constants/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
+
+import 'app_router.gr.dart';
+import 'constants/app_theme.dart';
 
 void main() {
   setPathUrlStrategy();

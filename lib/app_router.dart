@@ -5,10 +5,43 @@ import 'pages/pages.dart';
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: HomePage, initial: true),
-    AutoRoute(page: BookDetailsPage, path: '/book/:bookId'),
-    AutoRoute(page: BooksPage, path: '/books'),
-    RedirectRoute(path: '/books/*', redirectTo: '/books'),
+    AutoRoute(path: '/', page: HomePage),
+    CustomRoute(
+      path: '/books',
+      name: 'BooksRouter',
+      page: BooksWrapperPage,
+      transitionsBuilder: TransitionsBuilders.zoomIn,
+      children: [
+        CustomRoute(
+          path: '',
+          page: BooksPage,
+        ),
+        CustomRoute(
+          path: ':bookId',
+          page: BookDetailsPage,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+        ),
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
+    CustomRoute(
+      path: '/account',
+      name: 'AccountsRouter',
+      page: EmptyRouterPage,
+      transitionsBuilder: TransitionsBuilders.zoomIn,
+      children: [
+        CustomRoute(
+          path: '',
+          page: AccountPage,
+        ),
+        CustomRoute(
+          path: 'details',
+          page: AccountDetailsPage,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+        ),
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
+    ),
     RedirectRoute(path: '*', redirectTo: '/'),
   ],
   preferRelativeImports: true,
