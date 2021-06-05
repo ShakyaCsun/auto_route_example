@@ -8,55 +8,27 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomePage'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                AutoRouter.of(context).push(
-                  const BooksRouter(
-                    children: [
-                      BooksRoute(),
-                    ],
-                  ),
-                );
-              },
-              child: const Text('Go to BOOKS page'),
+    return AutoTabsScaffold(
+      routes: const [
+        BooksRouter(),
+        AccountsRouter(),
+      ],
+      bottomNavigationBuilder: (context, tabsRouter) {
+        return BottomNavigationBar(
+          currentIndex: tabsRouter.activeIndex,
+          onTap: tabsRouter.setActiveIndex,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.book_outlined),
+              label: 'Books',
             ),
-            ElevatedButton(
-              onPressed: () {
-                AutoRouter.of(context).push(
-                  LoginWrapperRoute(
-                    onLogin: (isLoggedIn) {
-                      if (isLoggedIn) {
-                        AutoRouter.of(context).push(
-                          const AccountsRouter(
-                            children: [
-                              AccountRoute(),
-                            ],
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('LOGIN unsuccessful'),
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                );
-              },
-              child: const Text('SIGN IN'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
+              label: 'Account',
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

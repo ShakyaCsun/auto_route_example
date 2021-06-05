@@ -5,3 +5,4 @@ export 'books_page.dart';
 export 'books_wrapper_page.dart';
 export 'home_page.dart';
 export 'login/pages.dart';
+export 'welcome_page.dart';

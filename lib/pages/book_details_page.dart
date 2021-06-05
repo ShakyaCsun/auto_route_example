@@ -21,7 +21,7 @@ class BookDetailsPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              AutoRouter.of(context).push(
+              AutoRouter.of(context).navigate(
                 const AccountsRouter(
                   children: [
                     AccountRoute(),

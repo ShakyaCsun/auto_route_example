@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:auto_route_example/app_router.gr.dart';
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatelessWidget {
@@ -9,7 +11,14 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('AccountPage'),
       ),
-      body: Container(),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            AutoRouter.of(context).push(const AccountDetailsRoute());
+          },
+          child: const Text('Details'),
+        ),
+      ),
     );
   }
 }

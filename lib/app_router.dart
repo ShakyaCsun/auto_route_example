@@ -13,41 +13,47 @@ import 'pages/pages.dart';
         AutoRoute(page: PasswordPage),
       ],
     ),
-    AutoRoute(path: '/', page: HomePage),
-    CustomRoute(
-      path: '/books',
-      name: 'BooksRouter',
-      page: BooksWrapperPage,
-      transitionsBuilder: TransitionsBuilders.zoomIn,
+    AutoRoute(path: '/', page: WelcomePage),
+    AutoRoute(
+      path: '/home',
+      page: HomePage,
       children: [
         CustomRoute(
-          path: '',
-          page: BooksPage,
+          path: 'books',
+          name: 'BooksRouter',
+          page: BooksWrapperPage,
+          transitionsBuilder: TransitionsBuilders.zoomIn,
+          children: [
+            CustomRoute(
+              path: '',
+              page: BooksPage,
+            ),
+            CustomRoute(
+              path: ':bookId',
+              page: BookDetailsPage,
+              transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+            ),
+            RedirectRoute(path: '*', redirectTo: ''),
+          ],
         ),
         CustomRoute(
-          path: ':bookId',
-          page: BookDetailsPage,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          path: 'account',
+          name: 'AccountsRouter',
+          page: EmptyRouterPage,
+          transitionsBuilder: TransitionsBuilders.zoomIn,
+          children: [
+            CustomRoute(
+              path: '',
+              page: AccountPage,
+            ),
+            CustomRoute(
+              path: 'details',
+              page: AccountDetailsPage,
+              transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+            ),
+            RedirectRoute(path: '*', redirectTo: ''),
+          ],
         ),
-        RedirectRoute(path: '*', redirectTo: ''),
-      ],
-    ),
-    CustomRoute(
-      path: '/account',
-      name: 'AccountsRouter',
-      page: EmptyRouterPage,
-      transitionsBuilder: TransitionsBuilders.zoomIn,
-      children: [
-        CustomRoute(
-          path: '',
-          page: AccountPage,
-        ),
-        CustomRoute(
-          path: 'details',
-          page: AccountDetailsPage,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-        ),
-        RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
     RedirectRoute(path: '*', redirectTo: '/'),

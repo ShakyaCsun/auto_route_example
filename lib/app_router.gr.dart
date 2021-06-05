@@ -21,27 +21,16 @@ class AppRouter extends _i1.RootStackRouter {
           final args = data.argsAs<LoginWrapperRouteArgs>();
           return _i3.LoginWrapperPage(key: args.key, onLogin: args.onLogin);
         }),
+    WelcomeRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i3.WelcomePage();
+        }),
     HomeRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i3.HomePage();
         }),
-    BooksRouter.name: (routeData) => _i1.CustomPage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i3.BooksWrapperPage();
-        },
-        transitionsBuilder: _i1.TransitionsBuilders.zoomIn,
-        opaque: true,
-        barrierDismissible: false),
-    AccountsRouter.name: (routeData) => _i1.CustomPage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i1.EmptyRouterPage();
-        },
-        transitionsBuilder: _i1.TransitionsBuilders.zoomIn,
-        opaque: true,
-        barrierDismissible: false),
     EmailRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
         routeData: routeData,
         builder: (data) {
@@ -54,13 +43,23 @@ class AppRouter extends _i1.RootStackRouter {
           final args = data.argsAs<PasswordRouteArgs>();
           return _i3.PasswordPage(key: args.key, onNext: args.onNext);
         }),
+    BooksRouter.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i3.BooksWrapperPage();
+        },
+        transitionsBuilder: _i1.TransitionsBuilders.zoomIn),
+    AccountsRouter.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i1.EmptyRouterPage();
+        },
+        transitionsBuilder: _i1.TransitionsBuilders.zoomIn),
     BooksRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i3.BooksPage();
-        },
-        opaque: true,
-        barrierDismissible: false),
+        }),
     BookDetailsRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (data) {
@@ -70,24 +69,18 @@ class AppRouter extends _i1.RootStackRouter {
                   BookDetailsRouteArgs(bookId: pathParams.getInt('bookId')));
           return _i3.BookDetailsPage(key: args.key, bookId: args.bookId);
         },
-        transitionsBuilder: _i1.TransitionsBuilders.slideLeftWithFade,
-        opaque: true,
-        barrierDismissible: false),
+        transitionsBuilder: _i1.TransitionsBuilders.slideLeftWithFade),
     AccountRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i3.AccountPage();
-        },
-        opaque: true,
-        barrierDismissible: false),
+        }),
     AccountDetailsRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i3.AccountDetailsPage();
         },
-        transitionsBuilder: _i1.TransitionsBuilders.slideLeftWithFade,
-        opaque: true,
-        barrierDismissible: false)
+        transitionsBuilder: _i1.TransitionsBuilders.slideLeftWithFade)
   };
 
   @override
@@ -96,18 +89,20 @@ class AppRouter extends _i1.RootStackRouter {
           _i1.RouteConfig(EmailRoute.name, path: 'email-page'),
           _i1.RouteConfig(PasswordRoute.name, path: 'password-page')
         ]),
-        _i1.RouteConfig(HomeRoute.name, path: '/'),
-        _i1.RouteConfig(BooksRouter.name, path: '/books', children: [
-          _i1.RouteConfig(BooksRoute.name, path: ''),
-          _i1.RouteConfig(BookDetailsRoute.name, path: ':bookId'),
-          _i1.RouteConfig('*#redirect',
-              path: '*', redirectTo: '', fullMatch: true)
-        ]),
-        _i1.RouteConfig(AccountsRouter.name, path: '/account', children: [
-          _i1.RouteConfig(AccountRoute.name, path: ''),
-          _i1.RouteConfig(AccountDetailsRoute.name, path: 'details'),
-          _i1.RouteConfig('*#redirect',
-              path: '*', redirectTo: '', fullMatch: true)
+        _i1.RouteConfig(WelcomeRoute.name, path: '/'),
+        _i1.RouteConfig(HomeRoute.name, path: '/home', children: [
+          _i1.RouteConfig(BooksRouter.name, path: 'books', children: [
+            _i1.RouteConfig(BooksRoute.name, path: ''),
+            _i1.RouteConfig(BookDetailsRoute.name, path: ':bookId'),
+            _i1.RouteConfig('*#redirect',
+                path: '*', redirectTo: '', fullMatch: true)
+          ]),
+          _i1.RouteConfig(AccountsRouter.name, path: 'account', children: [
+            _i1.RouteConfig(AccountRoute.name, path: ''),
+            _i1.RouteConfig(AccountDetailsRoute.name, path: 'details'),
+            _i1.RouteConfig('*#redirect',
+                path: '*', redirectTo: '', fullMatch: true)
+          ])
         ]),
         _i1.RouteConfig('*#redirect',
             path: '*', redirectTo: '/', fullMatch: true)
@@ -135,24 +130,17 @@ class LoginWrapperRouteArgs {
   final dynamic Function(bool) onLogin;
 }
 
+class WelcomeRoute extends _i1.PageRouteInfo {
+  const WelcomeRoute() : super(name, path: '/');
+
+  static const String name = 'WelcomeRoute';
+}
+
 class HomeRoute extends _i1.PageRouteInfo {
-  const HomeRoute() : super(name, path: '/');
+  const HomeRoute({List<_i1.PageRouteInfo>? children})
+      : super(name, path: '/home', initialChildren: children);
 
   static const String name = 'HomeRoute';
-}
-
-class BooksRouter extends _i1.PageRouteInfo {
-  const BooksRouter({List<_i1.PageRouteInfo>? children})
-      : super(name, path: '/books', initialChildren: children);
-
-  static const String name = 'BooksRouter';
-}
-
-class AccountsRouter extends _i1.PageRouteInfo {
-  const AccountsRouter({List<_i1.PageRouteInfo>? children})
-      : super(name, path: '/account', initialChildren: children);
-
-  static const String name = 'AccountsRouter';
 }
 
 class EmailRoute extends _i1.PageRouteInfo<EmailRouteArgs> {
@@ -186,6 +174,20 @@ class PasswordRouteArgs {
   final _i2.Key? key;
 
   final void Function(String) onNext;
+}
+
+class BooksRouter extends _i1.PageRouteInfo {
+  const BooksRouter({List<_i1.PageRouteInfo>? children})
+      : super(name, path: 'books', initialChildren: children);
+
+  static const String name = 'BooksRouter';
+}
+
+class AccountsRouter extends _i1.PageRouteInfo {
+  const AccountsRouter({List<_i1.PageRouteInfo>? children})
+      : super(name, path: 'account', initialChildren: children);
+
+  static const String name = 'AccountsRouter';
 }
 
 class BooksRoute extends _i1.PageRouteInfo {
