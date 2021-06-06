@@ -1,6 +1,6 @@
 # auto_route_example
 
-A new Flutter project.
+A new Flutter project testing out docs from [auto_route](https://autoroute.vercel.app/).
 
 ## Getting Started
 
