@@ -28,20 +28,7 @@ class WelcomePage extends StatelessWidget {
               onPressed: () {
                 AutoRouter.of(context).push(
                   LoginWrapperRoute(
-                    onLogin: (isLoggedIn) {
-                      if (isLoggedIn) {
-                        AutoRouter.of(context).pushAndPopUntil(
-                          const HomeRoute(),
-                          predicate: (route) => false,
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('LOGIN unsuccessful'),
-                          ),
-                        );
-                      }
-                    },
+                    onLogin: (email, password) {},
                   ),
                 );
               },

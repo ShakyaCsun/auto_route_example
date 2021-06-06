@@ -112,7 +112,7 @@ class AppRouter extends _i1.RootStackRouter {
 class LoginWrapperRoute extends _i1.PageRouteInfo<LoginWrapperRouteArgs> {
   LoginWrapperRoute(
       {_i2.Key? key,
-      required dynamic Function(bool) onLogin,
+      required dynamic Function(String, String) onLogin,
       List<_i1.PageRouteInfo>? children})
       : super(name,
             path: '/login',
@@ -127,7 +127,7 @@ class LoginWrapperRouteArgs {
 
   final _i2.Key? key;
 
-  final dynamic Function(bool) onLogin;
+  final dynamic Function(String, String) onLogin;
 }
 
 class WelcomeRoute extends _i1.PageRouteInfo {

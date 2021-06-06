@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app_router.gr.dart';
 
 class LoginWrapperPage extends StatefulWidget {
-  final Function(bool isLoggedIn) onLogin;
+  final Function(String email, String password) onLogin;
   const LoginWrapperPage({Key? key, required this.onLogin}) : super(key: key);
 
   @override
@@ -29,8 +29,9 @@ class _LoginWrapperPageState extends State<LoginWrapperPage> {
           if (email.contains('@'))
             PasswordRoute(
               onNext: (passwordResult) async {
-                widget.onLogin(
-                  await validateEmailPassword(email, passwordResult),
+                await widget.onLogin(
+                  email,
+                  passwordResult,
                 );
               },
             )
@@ -38,10 +39,4 @@ class _LoginWrapperPageState extends State<LoginWrapperPage> {
       },
     );
   }
-}
-
-Future<bool> validateEmailPassword(String email, String password) async {
-  return Future.delayed(const Duration(milliseconds: 500), () {
-    return email.contains('@') && password.length > 6;
-  });
 }
